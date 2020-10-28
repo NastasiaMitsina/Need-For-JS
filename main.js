@@ -116,7 +116,19 @@ function moveRoad() {
 
 function moveEnemy() {
     let enemy = document.querySelectorAll('.enemy');
+
     enemy.forEach(function(item){
+        let carRect = car.getBoundingClientRect();
+        let enemyRect = item. getBoundingClientRect();
+
+        if (carRect.top <= enemyRect.bottom && 
+            carRect.right >= enemyRect.left &&
+            carRect.left <= enemyRect.right &&
+            carRect.bottom >= enemyRect.top) {
+            settings.start = false;
+            console.warn('ДТП');
+        }
+
         item.y += settings.speed / 2;
         item.style.top = item.y + 'px';
         if(item.y >= document.documentElement.clientHeight) {
